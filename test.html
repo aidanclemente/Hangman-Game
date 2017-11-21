@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman</title>
+	<meta charset="utf-8">
+	<meta name=viewport content= "width=device-width initial-scale=1">
+
+<!-- 	<link rel="stylesheet" type="text/css" href="assets/css/style.css"> -->
+	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+<!-- 	<link rel="stylesheet" type="text/css" href="assets/css/eddie.ttf"> -->
+
+</head>
+<body>
+
+<!-- Need the user to press a key to start the game
+Capture the key pressed
+Compare key pressed to the letter in the word
+Display the result to the user -->
+
+	<div class="container">
+		<div class="jumbotron">
+
+		  <header><h1>Hangman</h1></header>
+
+		</div>
+
+		<div id="game">
+
+	      <h2>Press any key to get started</h2>
+	      <h3>Guesses remaining: <span id="remainGuess"></span></h3>
+	      
+	      <p>Word to Guess: <br>
+	      	<span id="wordToGuess"></span>
+	      </p>
+
+	      <p>Wins: <span id="numWins"></span></p>
+
+	      <p>Losses: <span id="numLosses"></span></p>
+
+	   
+	 	</div>
+
+	 </div>
+
+
+	<script type="text/javascript">
+
+//Global Variables
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		var userGuess = [];
+		var rightGuess = [];
+		var wrongGuess = [];	
+		var underScore = [];
+
+	// COUNTERS
+		var rightCount = 0;
+		var wrongCount = 0;
+		var guessesRemain = 9;
+		var wins = 0;
+		var losses = 0;
+
+// Create an array of words
+		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panters", "dolphins", "jets", "rams", "browns"];
+
+// choose word randomly
+		var randomWord = words[Math.floor(Math.random() * words.length)];
+
+//==============TEST ==========================
+		console.log(randomWord);
+		
+// create underscores based on length of word
+		var wordUnderscore = function () {
+			for (let i = 0; i < randomWord.length; i++) {
+				underScore.push('_');
+			}
+			return underScore;
+		}
+
+//==============TEST ==========================
+
+	console.log(underScore);
+	document.getElementById('wordToGuess').innerHTML = underScore;
+
+// get users guess and save it
+document.onkeyup = function(event) {
+	userGuess = event.key.toLowerCase();
+
+//Checking if letter guessed is inside the word
+	if (randomWord.indexOf(userGuess) > -1) {
+
+// if correct push to right array
+		rightGuess.push(userGuess);
+		guessesRemain--;
+
+//==============TEST ==========================
+		console.log("Right Guesses " + rightGuess);
+		console.log(guessesRemain);
+
+// if wrong push to wrong array
+	} else {
+		wrongGuess.push(userGuess);
+		guessesRemain--;
+
+//==============TEST ==========================
+		console.log("Wrong Guesses " + wrongGuess);
+		console.log(guessesRemain);
+	}
+
+//==============TEST ==========================
+	console.log(userGuess);
+}
+
+
+// then replace the underscore with the correctly guessed letter accordingly
+
+
+
+// once the user guesses all of the letter correctly, end game, alert winner, add to wins, reset game
+
+// if user runs out of guesses, end game, alert loser, add to loss, reset game
+
+// make sure the user can only guess letters
+
+// make sure user can only guess letters once
+
+
+
+
+
+	</script>
+
+</body>
+</html>

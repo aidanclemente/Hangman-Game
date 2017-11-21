@@ -73,10 +73,10 @@ Display the result to the user -->
 		var losses = 0;
 
 // Create an array of words
-		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panters", "dolphins", "jets", "rams", "browns"];
+		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panthers", "dolphins", "jets", "rams", "browns"];
 
 // FUNCTION TO START/RESTART THE GAME
-	function startGame() {
+	// function startGame() {
 // choose word randomly
 		var randomWord = words[Math.floor(Math.random() * words.length)];
 
@@ -94,24 +94,22 @@ Display the result to the user -->
 
 		// Writes the underscores to the DOM
 		document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
-	}
+	// }
 
- startGame();
+ // startGame();
 
 
 // get users guess and save it
-document.onkeyup = function(guess) {
-	userGuess = guess.key.toLowerCase();
-
-for (var i = 0; i < letters.length; i++) {
-
-	if (userGuess == letters[i]) {
+document.onkeyup = function(event) {
+	userGuess = event.key.toLowerCase();
 
 		//Checking if letter guessed is inside the word
 		if (randomWord.indexOf(userGuess) > -1) {
 
 			// if correct push to right array
-			rightGuess.push(userGuess);
+			// rightGuess.push(userGuess);
+
+
 			guessesRemain--;
 
 //==============TEST ==========================
@@ -121,9 +119,12 @@ for (var i = 0; i < letters.length; i++) {
 
 // For Loop to replace underscore with letter
 
-// for (var i = 0 ; i < underScore.length; i++) {
-// 	if randomWord ;
-// }
+for (var j = 0 ; j < randomWord.length; j++) {
+	if (randomWord[j] === userGuess) {
+		underScore[j] = userGuess;
+	}
+	document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
+}
 
 // if wrong push to wrong array
 		} else {
@@ -136,10 +137,10 @@ for (var i = 0; i < letters.length; i++) {
 
 //==============TEST ==========================
 	console.log(userGuess);
-	} else {
-		alert("Please press a letter.")
-		}
-	}
+	// } else {
+	// 	alert("Please press a letter.")
+	// 	}
+	// }
 };
 // then replace the underscore with the correctly guessed letter accordingly
 // create a for loop to loop through randomWord and replace all of the matching userGuess to the correct underScore spots: this should be inside the if statement
