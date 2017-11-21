@@ -1,0 +1,13 @@
+h1, h2 {
+	text-align: center;
+}
+
+
+
+h3 { 
+    font-family: Verdana, Tahoma;
+    padding: 10px;
+    margin: 20px;
+    border: 2px black solid;
+    text-align: center;
+}

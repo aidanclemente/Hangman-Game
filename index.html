@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman</title>
+	<meta charset="utf-8">
+	<meta name=viewport content= "width=device-width initial-scale=1">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+<!-- 	<link rel="stylesheet" type="text/css" href="assets/css/eddie.ttf"> -->
+
+</head>
+<body>
+
+<!-- Need the user to press a key to start the game
+Capture the key pressed
+Compare key pressed to the letter in the word
+Display the result to the user -->
+
+	<div class="container">
+		<div class="jumbotron">
+
+		  <header><h1>Hangman</h1></header>
+
+		</div>
+
+		<div id="game">
+
+	      <h2>Press any key to get started</h2>
+
+	      <h3>Wins: <span id="numWins"></span></h3>
+
+	      <h3>Losses: <span id="numLosses"></span></h3>
+
+	      <h3>Guesses remaining: <span id="remainGuess">10</span></h3>
+	      
+	      <h3>Word to Guess: <br>
+	      	<span id="wordToGuess"></span>
+	      </h3>
+
+	      <h3>Incorrect Letters Guessed: <br>
+	      	<span id="lettersGuessed"></span>
+	      </h3>
+
+	 	</div>
+
+	 </div>
+
+
+	<script type="text/javascript">
+
+//Global Variables
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// key user pushes
+		var userGuess = [];
+		// letter in word
+		var rightGuess = [];
+		// letter not in word
+		var wrongGuess = [];
+		// blank array that underscores will be pushed to
+		var underScore = [];
+		// word user will be guessing
+		var randomWord = "";
+
+		var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+		// COUNTERS
+		var rightCount = 0;
+		var wrongCount = 0;
+		var guessesRemain = 10;
+		var wins = 0;
+		var losses = 0;
+
+// Create an array of words
+		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panters", "dolphins", "jets", "rams", "browns"];
+
+// FUNCTION TO START/RESTART THE GAME
+	function startGame() {
+// choose word randomly
+		var randomWord = words[Math.floor(Math.random() * words.length)];
+
+//==============TEST ==========================
+		console.log(randomWord);
+		
+// create underscores based on length of word
+		 	function wordUnderscore() {
+				for (let i = 0; i < randomWord.length; i++) {
+				underScore.push('_');
+				}
+			}
+
+		wordUnderscore();
+
+		// Writes the underscores to the DOM
+		document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
+	}
+
+ startGame();
+
+
+// get users guess and save it
+document.onkeyup = function(guess) {
+	userGuess = guess.key.toLowerCase();
+
+for (var i = 0; i < letters.length; i++) {
+
+	if (userGuess == letters[i]) {
+
+		//Checking if letter guessed is inside the word
+		if (randomWord.indexOf(userGuess) > -1) {
+
+			// if correct push to right array
+			rightGuess.push(userGuess);
+			guessesRemain--;
+
+//==============TEST ==========================
+			console.log("Right Guesses " + rightGuess);
+			document.getElementById('remainGuess').innerHTML = guessesRemain;
+
+
+// For Loop to replace underscore with letter
+
+// for (var i = 0 ; i < underScore.length; i++) {
+// 	if randomWord ;
+// }
+
+// if wrong push to wrong array
+		} else {
+			wrongGuess.push(userGuess);
+			guessesRemain--;
+			// Prints incorrect letters guessed to the DOM
+			document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
+			document.getElementById('remainGuess').innerHTML = guessesRemain;
+			}
+
+//==============TEST ==========================
+	console.log(userGuess);
+	} else {
+		alert("Please press a letter.")
+		}
+	}
+};
+// then replace the underscore with the correctly guessed letter accordingly
+// create a for loop to loop through randomWord and replace all of the matching userGuess to the correct underScore spots: this should be inside the if statement
+// Do I need to split the randomWord into strings of letters?
+
+
+
+// once the user guesses all of the letter correctly, end game, alert winner, add to wins, reset game
+
+
+
+// if user runs out of guesses, end game, alert loser, add to loss, reset game
+
+
+// make sure the user can only guess letters
+
+
+// make sure user can only guess letters once
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>
