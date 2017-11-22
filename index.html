@@ -26,7 +26,7 @@ Display the result to the user -->
 	</div>
 
 	<div id="game">
-
+		<h1>Theme: NFL Teams <br> Superbowl Winners</h1>
 		<h2>Press any key to get started</h2>
 
 		<h3>Wins: <span id="numWins"></span></h3>
@@ -51,7 +51,7 @@ Display the result to the user -->
 <script type="text/javascript">
 
 //Global Variables
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// key user pushes
 		var userGuess = [];
 		// letter not in word
@@ -66,19 +66,16 @@ Display the result to the user -->
 		var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 		// COUNTERS
-		var rightCount = 1;
 		var guessesRemain = 10;
 		var wins = 0;
 		var losses = 0;
 
-// Create an array of words
-var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panthers", "dolphins", "jets", "rams", "browns"];
+		// Create an array of words
+		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panthers", "dolphins", "jets", "rams", "colts", "ravens", "chiefs", "redskins", "saints", "niners"];
 
-// FUNCTION TO START/RESTART THE GAME
-	// function startGame() {
 
 // choose word randomly
-var randomWord = words[Math.floor(Math.random() * words.length)];
+randomWord = words[Math.floor(Math.random() * words.length)];
 
 //==============TEST ==========================
 console.log(randomWord);
@@ -88,29 +85,28 @@ for (let i = 0; i < randomWord.length; i++) {
 	underScore.push('_');
 }
 
-	// Writes the underscores to the DOM
-	document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
-	// }
-
- // startGame();
-
+// Writes the underscores to the DOM
+document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
 
 // get users guess and save it
 document.onkeyup = function(guess) {
 	userGuess = guess.key.toLowerCase();
-	console.log("User Guess: " + userGuess);
+
+	// Checks if userGuess is a Letter
 	if (letters.indexOf(userGuess) > -1) {
 
+		// Checks if userGuess was already guessed
 		if (guesssedLetters.indexOf(userGuess) > -1) {
 			console.log(guesssedLetters);
 			alert("Please enter a letter you haven't guessed");
 			}
 
-		//Checking if letter guessed is inside the word
+		//Checks if userGuess is inside the word
 		 else if (randomWord.indexOf(userGuess) > -1) {
 				
 			guesssedLetters.push(userGuess);
 			console.log(guesssedLetters);
+
 			//Updates remaining number of guesses
 			guessesRemain--;
 			document.getElementById('remainGuess').innerHTML = guessesRemain;	
@@ -127,45 +123,61 @@ document.onkeyup = function(guess) {
 			if (underScore.indexOf("_") == -1) {
 				wins++;
 				document.getElementById('numWins').innerHTML = wins;
-				alert ("Congratulation! You WIN!!!");
+				setTimeout(function() {alert ("Congratulations! You WIN!!! The team was the " + randomWord + "!"); }, 50);
+				setTimeout(function() {reset(); }, 100);
 			}
-		}
-// if wrong push to wrong array
- else {
-	wrongGuess.push(userGuess);
-	guesssedLetters.push(userGuess);
+		} else {
+			// if wrong push to wrong array
+			wrongGuess.push(userGuess);
+			guesssedLetters.push(userGuess);
 			// Prints incorrect letters guessed to the DOM
 			document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
 			// Updates guesses remaining
 			guessesRemain--;
 			document.getElementById('remainGuess').innerHTML = guessesRemain;
-		}
+			if (guessesRemain === 0) {
+				alert("Oh NO you've run out of guesses!!!");
+				alert("The team was the " + randomWord);
+				losses++;
+				document.getElementById('numLosses').innerHTML = losses;
+				reset();
+			}
+		};
 	} else {
 		alert("Please enter a letter");
+	};
+
+	//Reset function
+	function reset() {
+
+		 guessesRemain = 10;
+		 underScore = [];
+		 guesssedLetters = [];
+		 wrongGuess = [];
+
+		 randomWord = words[Math.floor(Math.random() * words.length)];
+
+	//==============TEST ==========================
+	console.log(randomWord);
+	console.log(guesssedLetters);
+
+	// create underscores based on length of word
+	for (let i = 0; i < randomWord.length; i++) {
+		underScore.push('_');
 	}
-//==============TEST ==========================
 
-
-	// }
-
-
-// once the user guesses all of the letter correctly, end game, alert winner, add to wins, reset game
+		// Writes the underscores to the DOM
+		document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
+		// resets the number of guesses
+		document.getElementById('remainGuess').innerHTML = guessesRemain;
+		//resets incorrect letters guessed to the DOM
+		document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
+	};
 
 };
 
 // if user runs out of guesses, end game, alert loser, add to loss, reset game
-
-
-// make sure the user can only guess letters
-
-
-// make sure user can only guess letters once
-
-
-
-
-
-
+ 
 </script>
 
 </body>
