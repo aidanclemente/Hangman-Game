@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
-<!-- 	<link rel="stylesheet" type="text/css" href="assets/css/eddie.ttf"> -->
+	<!-- 	<link rel="stylesheet" type="text/css" href="assets/css/eddie.ttf"> -->
 
 </head>
 <body>
@@ -18,37 +18,37 @@ Capture the key pressed
 Compare key pressed to the letter in the word
 Display the result to the user -->
 
-	<div class="container">
-		<div class="jumbotron">
+<div class="container">
+	<div class="jumbotron">
 
-		  <header><h1>Hangman</h1></header>
+		<header><h1>Hangman</h1></header>
 
-		</div>
+	</div>
 
-		<div id="game">
+	<div id="game">
 
-	      <h2>Press any key to get started</h2>
+		<h2>Press any key to get started</h2>
 
-	      <h3>Wins: <span id="numWins"></span></h3>
+		<h3>Wins: <span id="numWins"></span></h3>
 
-	      <h3>Losses: <span id="numLosses"></span></h3>
+		<h3>Losses: <span id="numLosses"></span></h3>
 
-	      <h3>Guesses remaining: <span id="remainGuess">10</span></h3>
-	      
-	      <h3>Word to Guess: <br>
-	      	<span id="wordToGuess"></span>
-	      </h3>
+		<h3>Guesses remaining: <span id="remainGuess">10</span></h3>
 
-	      <h3>Incorrect Letters Guessed: <br>
-	      	<span id="lettersGuessed"></span>
-	      </h3>
+		<h3>Word to Guess: <br>
+			<span id="wordToGuess"></span>
+		</h3>
 
-	 	</div>
+		<h3>Incorrect Letters Guessed: <br>
+			<span id="lettersGuessed"></span>
+		</h3>
 
-	 </div>
+	</div>
+
+</div>
 
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
 //Global Variables
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -72,21 +72,21 @@ Display the result to the user -->
 		var losses = 0;
 
 // Create an array of words
-		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panthers", "dolphins", "jets", "rams", "browns"];
+var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panthers", "dolphins", "jets", "rams", "browns"];
 
 // FUNCTION TO START/RESTART THE GAME
 	// function startGame() {
 
 // choose word randomly
-		var randomWord = words[Math.floor(Math.random() * words.length)];
+var randomWord = words[Math.floor(Math.random() * words.length)];
 
 //==============TEST ==========================
-		console.log(randomWord);
-		
+console.log(randomWord);
+
 // create underscores based on length of word
-	for (let i = 0; i < randomWord.length; i++) {
-		underScore.push('_');
-	}
+for (let i = 0; i < randomWord.length; i++) {
+	underScore.push('_');
+}
 
 	// Writes the underscores to the DOM
 	document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
@@ -98,30 +98,29 @@ Display the result to the user -->
 // get users guess and save it
 document.onkeyup = function(guess) {
 	userGuess = guess.key.toLowerCase();
+	console.log("User Guess: " + userGuess);
+	if (letters.indexOf(userGuess) > -1) {
 
-		if (letters.indexOf(userGuess) > -1) {
-
-			if (userGuess.indexOf(guesssedLetters)) {
-				alert("Please enter a letter you haven't guessed");
+		if (guesssedLetters.indexOf(userGuess) > -1) {
+			console.log(guesssedLetters);
+			alert("Please enter a letter you haven't guessed");
 			}
-			
-		//Checking if letter guessed is inside the word
-		else if (randomWord.indexOf(userGuess) > -1) {
-			// counter to end game
-			rightCount++;
-			guesssedLetters.push(userGuess);
 
+		//Checking if letter guessed is inside the word
+		 else if (randomWord.indexOf(userGuess) > -1) {
+				
+			guesssedLetters.push(userGuess);
+			console.log(guesssedLetters);
 			//Updates remaining number of guesses
 			guessesRemain--;
-			document.getElementById('remainGuess').innerHTML = guessesRemain;
-
+			document.getElementById('remainGuess').innerHTML = guessesRemain;	
 
 			// For Loop to replace underscore with letter
 			for (var j = 0 ; j < randomWord.length; j++) {
 				if (randomWord[j] === userGuess) {
 					underScore[j] = userGuess;
 				}
-			document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
+				document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
 			}
 
 			// They guessed all the letters WIN
@@ -130,22 +129,22 @@ document.onkeyup = function(guess) {
 				document.getElementById('numWins').innerHTML = wins;
 				alert ("Congratulation! You WIN!!!");
 			}
+		}
 // if wrong push to wrong array
-		} else {
-			wrongGuess.push(userGuess);
-			guesssedLetters.push(userGuess);
+ else {
+	wrongGuess.push(userGuess);
+	guesssedLetters.push(userGuess);
 			// Prints incorrect letters guessed to the DOM
 			document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
 			// Updates guesses remaining
 			guessesRemain--;
 			document.getElementById('remainGuess').innerHTML = guessesRemain;
-			}
+		}
 	} else {
 		alert("Please enter a letter");
 	}
 //==============TEST ==========================
-	console.log(userGuess);
-	console.log(rightCount);
+
 
 	// }
 
@@ -167,7 +166,7 @@ document.onkeyup = function(guess) {
 
 
 
-	</script>
+</script>
 
 </body>
 </html>
