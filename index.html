@@ -77,6 +77,16 @@ Display the result to the user -->
 // choose word randomly
 randomWord = words[Math.floor(Math.random() * words.length)];
 
+
+// 
+for (var i = 0; i < 1; i++) {
+
+var wordsSplice = words.splice(randomWord, 1);
+console.log("spliced words is " + wordsSplice);
+console.log("words is " + words[i]);
+console.log(words);
+
+}
 //==============TEST ==========================
 console.log(randomWord);
 
@@ -135,6 +145,8 @@ document.onkeyup = function(guess) {
 			// Updates guesses remaining
 			guessesRemain--;
 			document.getElementById('remainGuess').innerHTML = guessesRemain;
+
+			// Ends the game and rests
 			if (guessesRemain === 0) {
 				alert("Oh NO you've run out of guesses!!!");
 				alert("The team was the " + randomWord);
@@ -175,8 +187,6 @@ document.onkeyup = function(guess) {
 	};
 
 };
-
-// if user runs out of guesses, end game, alert loser, add to loss, reset game
  
 </script>
 
