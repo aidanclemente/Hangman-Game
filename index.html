@@ -73,33 +73,11 @@ Display the result to the user -->
 		// Create an array of words
 		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panthers", "dolphins", "jets", "rams", "colts", "ravens", "chiefs", "redskins", "saints", "niners"];
 
-
-// choose word randomly
-randomWord = words[Math.floor(Math.random() * words.length)];
-
-
-// 
-for (var i = 0; i < 1; i++) {
-
-var wordsSplice = words.splice(randomWord, 1);
-console.log("spliced words is " + wordsSplice);
-console.log("words is " + words[i]);
-console.log(words);
-
-}
-//==============TEST ==========================
-console.log(randomWord);
-
-// create underscores based on length of word
-for (let i = 0; i < randomWord.length; i++) {
-	underScore.push('_');
-}
-
-// Writes the underscores to the DOM
-document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
+reset();
 
 // get users guess and save it
 document.onkeyup = function(guess) {
+
 	userGuess = guess.key.toLowerCase();
 
 	// Checks if userGuess is a Letter
@@ -158,6 +136,7 @@ document.onkeyup = function(guess) {
 	} else {
 		alert("Please enter a letter");
 	};
+};
 
 	//Reset function
 	function reset() {
@@ -167,26 +146,27 @@ document.onkeyup = function(guess) {
 		 guesssedLetters = [];
 		 wrongGuess = [];
 
-		 randomWord = words[Math.floor(Math.random() * words.length)];
+		index = Math.floor(Math.random() * words.length);
+		randomWord = words.splice(index, 1).toString()
 
 	//==============TEST ==========================
 	console.log(randomWord);
 	console.log(guesssedLetters);
 
-	// create underscores based on length of word
-	for (let i = 0; i < randomWord.length; i++) {
-		underScore.push('_');
-	}
+		// create underscores based on length of word
+		for (let i = 0; i < randomWord.length; i++) {
+			underScore.push('_');
+		}
 
-		// Writes the underscores to the DOM
-		document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
-		// resets the number of guesses
-		document.getElementById('remainGuess').innerHTML = guessesRemain;
-		//resets incorrect letters guessed to the DOM
-		document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
+			// Writes the underscores to the DOM
+			document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
+			// resets the number of guesses
+			document.getElementById('remainGuess').innerHTML = guessesRemain;
+			//resets incorrect letters guessed to the DOM
+			document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
 	};
 
-};
+
  
 </script>
 
