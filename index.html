@@ -8,167 +8,42 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
-	<!-- 	<link rel="stylesheet" type="text/css" href="assets/css/eddie.ttf"> -->
+	
 
 </head>
 <body>
 
-<!-- Need the user to press a key to start the game
-Capture the key pressed
-Compare key pressed to the letter in the word
-Display the result to the user -->
-
 <div class="container">
 	<div class="jumbotron">
-
-		<header><h1>Hangman</h1></header>
-
+		<header>
+			HANGMAN
+		</header>
 	</div>
-
-	<div id="game">
-		<h1>Theme: NFL Teams <br> Superbowl Winners</h1>
-		<h2>Press any key to get started</h2>
-
-		<h3>Wins: <span id="numWins"></span></h3>
-
-		<h3>Losses: <span id="numLosses"></span></h3>
-
-		<h3>Guesses remaining: <span id="remainGuess">10</span></h3>
-
-		<h3>Word to Guess: <br>
-			<span id="wordToGuess"></span>
-		</h3>
-
-		<h3>Incorrect Letters Guessed: <br>
-			<span id="lettersGuessed"></span>
-		</h3>
-
+	<div class="container">
+		<div class="panel panel-default">
+			<h1>Theme: NFL Superbowl Winners</h1>
+			<h2 id="hide">Press any letter to get started</h2>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<a href="#" class="thumbnail">
+					<img src="assets/images/nfl.jpg" alt="nfl logo">
+				</a>
+			</div>
+			<div class="panel panel-default col-sm-8">
+				<h3>Wins: <span id="numWins"></span></h3>
+				<h3>Losses: <span id="numLosses"></span></h3>
+				<h3>Guesses remaining: <span id="remainGuess">10</span></h3>
+				<h3>Word to Guess: <br>
+					<span id="wordToGuess"></span>
+				</h3>
+				<h3>Incorrect Letters Guessed: <br>
+					<span id="lettersGuessed"></span>
+				</h3>
+			</div>
+		</div>
 	</div>
-
 </div>
-
-
-<script type="text/javascript">
-
-//Global Variables
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// key user pushes
-		var userGuess = [];
-		// letter not in word
-		var wrongGuess = [];
-		// all letters guessed
-		var guesssedLetters = [];
-		// blank array that underscores will be pushed to
-		var underScore = [];
-		// word user will be guessing
-		var randomWord = "";
-
-		var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-
-		// COUNTERS
-		var guessesRemain = 10;
-		var wins = 0;
-		var losses = 0;
-
-		// Create an array of words
-		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "vikings", "eagles", "giants", "bears", "panthers", "dolphins", "jets", "rams", "colts", "ravens", "chiefs", "redskins", "saints", "niners"];
-
-reset();
-
-// get users guess and save it
-document.onkeyup = function(guess) {
-
-	userGuess = guess.key.toLowerCase();
-
-	// Checks if userGuess is a Letter
-	if (letters.indexOf(userGuess) > -1) {
-
-		// Checks if userGuess was already guessed
-		if (guesssedLetters.indexOf(userGuess) > -1) {
-			console.log(guesssedLetters);
-			alert("Please enter a letter you haven't guessed");
-			}
-
-		//Checks if userGuess is inside the word
-		 else if (randomWord.indexOf(userGuess) > -1) {
-				
-			guesssedLetters.push(userGuess);
-			console.log(guesssedLetters);
-
-			//Updates remaining number of guesses
-			guessesRemain--;
-			document.getElementById('remainGuess').innerHTML = guessesRemain;	
-
-			// For Loop to replace underscore with letter
-			for (var j = 0 ; j < randomWord.length; j++) {
-				if (randomWord[j] === userGuess) {
-					underScore[j] = userGuess;
-				}
-				document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
-			}
-
-			// They guessed all the letters WIN
-			if (underScore.indexOf("_") == -1) {
-				wins++;
-				document.getElementById('numWins').innerHTML = wins;
-				setTimeout(function() {alert ("Congratulations! You WIN!!! The team was the " + randomWord + "!"); }, 50);
-				setTimeout(function() {reset(); }, 100);
-			}
-		} else {
-			// if wrong push to wrong array
-			wrongGuess.push(userGuess);
-			guesssedLetters.push(userGuess);
-			// Prints incorrect letters guessed to the DOM
-			document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
-			// Updates guesses remaining
-			guessesRemain--;
-			document.getElementById('remainGuess').innerHTML = guessesRemain;
-
-			// Ends the game and rests
-			if (guessesRemain === 0) {
-				alert("Oh NO you've run out of guesses!!!");
-				alert("The team was the " + randomWord);
-				losses++;
-				document.getElementById('numLosses').innerHTML = losses;
-				reset();
-			}
-		};
-	} else {
-		alert("Please enter a letter");
-	};
-};
-
-	//Reset function
-	function reset() {
-
-		 guessesRemain = 10;
-		 underScore = [];
-		 guesssedLetters = [];
-		 wrongGuess = [];
-
-		index = Math.floor(Math.random() * words.length);
-		randomWord = words.splice(index, 1).toString()
-
-	//==============TEST ==========================
-	console.log(randomWord);
-	console.log(guesssedLetters);
-
-		// create underscores based on length of word
-		for (let i = 0; i < randomWord.length; i++) {
-			underScore.push('_');
-		}
-
-			// Writes the underscores to the DOM
-			document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
-			// resets the number of guesses
-			document.getElementById('remainGuess').innerHTML = guessesRemain;
-			//resets incorrect letters guessed to the DOM
-			document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
-	};
-
-
- 
-</script>
-
+<script src="assets/javascript/game.js" type="text/javascript"></script>
 </body>
 </html>

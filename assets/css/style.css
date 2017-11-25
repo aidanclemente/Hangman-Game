@@ -1,18 +1,48 @@
-.jumbotron {
-	font-size: 60px;
-	padding: 10px;
+body {
+	font-family: "Harabara Bold";
+	background-color: #003368;
 }
-
-h1, h2 {
-	text-align: center;
-}
-
-
 
 h3 { 
-    font-family: Verdana, Tahoma;
     padding: 10px;
     margin: 20px;
     border: 2px black solid;
     text-align: center;
 }
+
+@font-face {
+font-family: "Harabara Bold";
+src: url("css/fonts/Harabara.eot");
+src: 
+url("css/fonts/Harabara.woff") format("woff"),
+url("css/fonts/Harabara.otf") format("opentype"),
+url("css/fonts/Harabara.svg#filename") format("svg");
+}
+
+img {
+	width: 100%;
+	margin-top: 20px;
+}
+
+h1, h2 {
+	text-align: center;
+	color: #fff;
+}
+
+h3 {
+	background-color: #fff;
+}
+#picture{
+	background-image: url("../images/nfl.jpg");
+}
+
+.jumbotron {
+	font-size: 100px;
+	padding: 0px;
+	background-color: #003368;
+	color: white;
+	text-align: center;
+}
+
+
+
