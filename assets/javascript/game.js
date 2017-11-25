@@ -19,13 +19,23 @@
 		var wins = 0;
 		var losses = 0;
 
-		// Create an array of words
+		//NFL teams to choose from randomly
 		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "giants", "bears", "dolphins", "jets", "rams", "colts", "ravens", "redskins", "saints", "niners", "buccaneers", "chiefs"];
-
+		//Pictures for hints
 		var pics = ["assets/images/pittsburgh1.jpg", "assets/images/patriots.jpg", "assets/images/cowboys.jpg", "assets/images/raiders.jpg", "assets/images/seahawks.jpg", "assets/images/packers.jpg", "assets/images/broncos.jpg", "assets/images/giants.jpg", "assets/images/bears.png", "assets/images/dolphins.png", "assets/images/jets.jpg", "assets/images/rams.png", "assets/images/colts.png", "assets/images/ravens.png", "assets/images/redskins.png", "assets/images/saints.png", "assets/images/niners.gif", "assets/images/buccaneers.gif", "assets/images/chiefs.jpg"]
 
 // Starts the game
 startGame();
+
+// Starts music automatically 
+window.onload = function() {
+	document.getElementById("music").play();
+};
+
+//Picture for a Hint
+document.getElementById("btn").addEventListener("click", function(){
+	document.getElementById('newPic').src = picHint;
+});
 
 // get users guess and save it 
 document.onkeyup = function(guess) {
@@ -38,13 +48,12 @@ document.onkeyup = function(guess) {
 
 		// Checks if userGuess was already guessed
 		if (guesssedLetters.indexOf(userGuess) > -1) {
-			console.log(guesssedLetters);
 			alert("Please enter a letter you haven't guessed");
 		}
 
 		//Checks if userGuess is inside the word
-		else if (randomWord.indexOf(userGuess) > -1) {
-				
+		else if (randomWord.indexOf(userGuess) > -1) {	
+							
 			guesssedLetters.push(userGuess);
 
 			//Updates remaining number of guesses
@@ -58,20 +67,7 @@ document.onkeyup = function(guess) {
 				}
 				document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
 			}
-
-			// They guessed all the letters WIN
-			if (underScore.indexOf("_") == -1) {
-				wins++;
-				document.getElementById('numWins').innerHTML = wins;
-				setTimeout(function() {alert ("Congratulations! You WIN!!! The team was the " + randomWord + "!"); }, 50);
-				setTimeout(function() {startGame(); }, 100);
-			} else if (guessesRemain === 0) {				
-				losses++;
-				document.getElementById('numLosses').innerHTML = losses;
-				setTimeout(function() {alert("Oh NO you've run out of guesses!!!"); }, 50);
-				setTimeout(function() {alert ("The team was the " + randomWord + "!"); }, 50);
-				setTimeout(function() {startGame(); }, 100);
-			}
+			winLose();
 		} else {
 			// if wrong push to wrong array
 			wrongGuess.push(userGuess);
@@ -82,21 +78,15 @@ document.onkeyup = function(guess) {
 			guessesRemain--;
 			document.getElementById('remainGuess').innerHTML = guessesRemain;
 
-			// Ends the game and rests
-			if (guessesRemain === 0) {				
-				losses++;
-				document.getElementById('numLosses').innerHTML = losses;
-				setTimeout(function() {alert("Oh NO you've run out of guesses!!!"); }, 50);
-				setTimeout(function() {alert ("The team was the " + randomWord + "!"); }, 50);
-				setTimeout(function() {startGame(); }, 100);
-			}
+			winLose();
 		};
 	} else {
 		alert("Please enter a letter");
 	};
+
 };
 
-//Reset function
+//Start/Reset function
 function startGame() {
 
 	 guessesRemain = 10;
@@ -107,11 +97,6 @@ function startGame() {
 	index = Math.floor(Math.random() * words.length);
 	randomWord = words.splice(index, 1).toString();
 	picHint = pics.splice(index, 1).toString();
-
-
-//==============TEST ==========================
-console.log(randomWord);
-console.log(picHint);
 
 	// create underscores based on length of word
 	for (let i = 0; i < randomWord.length; i++) {
@@ -128,9 +113,26 @@ console.log(picHint);
 	document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
 };
 
-//Click Button for a Hint
-document.getElementById("btn").addEventListener("click", function(){
-	document.getElementById('newPic').src = picHint;
-});
+function winLose() {
+// They guessed all the letters WIN
+	if (underScore.indexOf("_") == -1) {
+		wins++;
+		document.getElementById('numWins').innerHTML = wins;
+		setTimeout(function() {alert ("Congratulations! You WIN!!! The team was the " + randomWord + "!"); }, 50);
+		setTimeout(function() {startGame(); }, 100);
+	} else if (guessesRemain === 0) {				
+		losses++;
+		document.getElementById('numLosses').innerHTML = losses;
+		setTimeout(function() {alert("Oh NO you've run out of guesses!!!"); }, 50);
+		setTimeout(function() {alert ("The team was the " + randomWord + "!"); }, 50);
+		setTimeout(function() {startGame(); }, 100);		
+	};
+};
 
-
+// function refresh() {
+// //When the array is empty alert the user to refresh the page
+// 	if (words.length == 0) {
+// 	alert("Great Job! You went through all of the teams!");
+// 	alert("Refresh the page to play again!");
+// 	};
+// };
