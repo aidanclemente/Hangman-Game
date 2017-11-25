@@ -10,6 +10,7 @@
 		var underScore = [];
 		// word user will be guessing
 		var randomWord = "";
+		var picHint = "";
 
 		var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
@@ -21,7 +22,7 @@
 		// Create an array of words
 		var words = ["steelers", "patriots", "cowboys", "raiders", "seahawks", "packers", "broncos", "giants", "bears", "dolphins", "jets", "rams", "colts", "ravens", "redskins", "saints", "niners", "buccaneers", "chiefs"];
 
-		var pics = ["steelers1.png"]
+		var pics = ["assets/images/pittsburgh1.jpg", "assets/images/patriots.jpg", "assets/images/cowboys.jpg", "assets/images/raiders.jpg", "assets/images/seahawks.jpg", "assets/images/packers.jpg", "assets/images/broncos.jpg", "assets/images/giants.jpg", "assets/images/bears.png", "assets/images/dolphins.png", "assets/images/jets.jpg", "assets/images/rams.png", "assets/images/colts.png", "assets/images/ravens.png", "assets/images/redskins.png", "assets/images/saints.png", "assets/images/niners.gif", "assets/images/buccaneers.gif", "assets/images/chiefs.jpg"]
 
 // Starts the game
 startGame();
@@ -45,7 +46,6 @@ document.onkeyup = function(guess) {
 		else if (randomWord.indexOf(userGuess) > -1) {
 				
 			guesssedLetters.push(userGuess);
-			console.log(guesssedLetters);
 
 			//Updates remaining number of guesses
 			guessesRemain--;
@@ -65,6 +65,12 @@ document.onkeyup = function(guess) {
 				document.getElementById('numWins').innerHTML = wins;
 				setTimeout(function() {alert ("Congratulations! You WIN!!! The team was the " + randomWord + "!"); }, 50);
 				setTimeout(function() {startGame(); }, 100);
+			} else if (guessesRemain === 0) {				
+				losses++;
+				document.getElementById('numLosses').innerHTML = losses;
+				setTimeout(function() {alert("Oh NO you've run out of guesses!!!"); }, 50);
+				setTimeout(function() {alert ("The team was the " + randomWord + "!"); }, 50);
+				setTimeout(function() {startGame(); }, 100);
 			}
 		} else {
 			// if wrong push to wrong array
@@ -77,12 +83,12 @@ document.onkeyup = function(guess) {
 			document.getElementById('remainGuess').innerHTML = guessesRemain;
 
 			// Ends the game and rests
-			if (guessesRemain === 0) {
-				alert("Oh NO you've run out of guesses!!!");
-				alert("The team was the " + randomWord);
+			if (guessesRemain === 0) {				
 				losses++;
 				document.getElementById('numLosses').innerHTML = losses;
-				startGame();
+				setTimeout(function() {alert("Oh NO you've run out of guesses!!!"); }, 50);
+				setTimeout(function() {alert ("The team was the " + randomWord + "!"); }, 50);
+				setTimeout(function() {startGame(); }, 100);
 			}
 		};
 	} else {
@@ -99,11 +105,13 @@ function startGame() {
 	 wrongGuess = [];
 
 	index = Math.floor(Math.random() * words.length);
-	randomWord = words.splice(index, 1).toString()
+	randomWord = words.splice(index, 1).toString();
+	picHint = pics.splice(index, 1).toString();
+
 
 //==============TEST ==========================
 console.log(randomWord);
-console.log(guesssedLetters);
+console.log(picHint);
 
 	// create underscores based on length of word
 	for (let i = 0; i < randomWord.length; i++) {
@@ -119,3 +127,10 @@ console.log(guesssedLetters);
 	//resets incorrect letters guessed to the DOM
 	document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
 };
+
+//Click Button for a Hint
+document.getElementById("btn").addEventListener("click", function(){
+	document.getElementById('newPic').src = picHint;
+});
+
+

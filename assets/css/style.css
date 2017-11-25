@@ -1,5 +1,5 @@
 body {
-	font-family: "Harabara Bold";
+	font-family: "NFL Bold";
 	background-color: #003368;
 }
 
@@ -11,12 +11,12 @@ h3 {
 }
 
 @font-face {
-font-family: "Harabara Bold";
-src: url("css/fonts/Harabara.eot");
+font-family: "NFL";
+src: url("css/fonts/NFL.eot");
 src: 
-url("css/fonts/Harabara.woff") format("woff"),
-url("css/fonts/Harabara.otf") format("opentype"),
-url("css/fonts/Harabara.svg#filename") format("svg");
+url("css/fonts/NFL.woff") format("woff"),
+url("css/fonts/NFL.otf") format("opentype"),
+url("css/fonts/NFL.svg#filename") format("svg");
 }
 
 img {
@@ -42,6 +42,16 @@ h3 {
 	background-color: #003368;
 	color: white;
 	text-align: center;
+}
+
+.btn {
+	margin: 20px;
+	width: 50%;
+	background-color: #efefef;
+}
+
+.btn:hover {
+	background-color: #b2b2b2;
 }
 
 
