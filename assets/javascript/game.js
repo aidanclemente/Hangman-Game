@@ -24,7 +24,7 @@
 		//Pictures for hints
 		var pics = ["assets/images/pittsburgh1.jpg", "assets/images/patriots.jpg", "assets/images/cowboys.jpg", "assets/images/raiders.jpg", "assets/images/seahawks.jpg", "assets/images/packers.jpg", "assets/images/broncos.jpg", "assets/images/giants.jpg", "assets/images/bears.png", "assets/images/dolphins.png", "assets/images/jets.jpg", "assets/images/rams.png", "assets/images/colts.png", "assets/images/ravens.png", "assets/images/redskins.png", "assets/images/saints.png", "assets/images/niners.gif", "assets/images/buccaneers.gif", "assets/images/chiefs.jpg"]
 
-// Starts the game
+// Starts the game 
 startGame();
 
 // Starts music automatically 
@@ -53,7 +53,7 @@ document.onkeyup = function(guess) {
 
 		//Checks if userGuess is inside the word
 		else if (randomWord.indexOf(userGuess) > -1) {	
-							
+
 			guesssedLetters.push(userGuess);
 
 			//Updates remaining number of guesses
@@ -117,6 +117,7 @@ function winLose() {
 // They guessed all the letters WIN
 	if (underScore.indexOf("_") == -1) {
 		wins++;
+		document.getElementById("clap").play();
 		document.getElementById('numWins').innerHTML = wins;
 		setTimeout(function() {alert ("Congratulations! You WIN!!! The team was the " + randomWord + "!"); }, 50);
 		setTimeout(function() {startGame(); }, 100);

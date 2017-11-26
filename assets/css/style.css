@@ -1,15 +1,3 @@
-body {
-	font-family: "NFL Bold";
-	background-color: #003368;
-}
-
-h3 { 
-    padding: 10px;
-    margin: 20px;
-    border: 2px black solid;
-    text-align: center;
-}
-
 @font-face {
 font-family: "NFL";
 src: url("css/fonts/NFL.eot");
@@ -17,6 +5,11 @@ src:
 url("css/fonts/NFL.woff") format("woff"),
 url("css/fonts/NFL.otf") format("opentype"),
 url("css/fonts/NFL.svg#filename") format("svg");
+}
+
+body {
+	font-family: "NFL Bold";
+	background-color: #003368;
 }
 
 img {
@@ -27,21 +20,26 @@ img {
 h1, h2 {
 	text-align: center;
 	color: #fff;
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
 h3 {
+	padding: 10px;
+    margin: 20px;
+    border: 2px black solid;
+    text-align: center;
 	background-color: #fff;
-}
-#picture{
-	background-image: url("../images/nfl.jpg");
 }
 
 .jumbotron {
 	font-size: 100px;
+    font-weight: bolder;
+    margin-bottom: 0;
 	padding: 0px;
 	background-color: #003368;
 	color: white;
 	text-align: center;
+	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
 .btn {
@@ -54,5 +52,12 @@ h3 {
 	background-color: #b2b2b2;
 }
 
+#music {
+	width: 100%;
+}
+
+#picture{
+	background-image: url("../images/nfl.jpg");
+}
 
 
