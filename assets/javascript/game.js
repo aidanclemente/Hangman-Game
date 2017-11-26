@@ -103,13 +103,13 @@ function startGame() {
 		underScore.push('_');
 	}
 
+	// Hides instructions
 	document.getElementById('hide').innerHTML = "Press any letter to get started";
-
 	// Writes the underscores to the DOM
 	document.getElementById('wordToGuess').innerHTML = underScore.join(" ");
-	// resets the number of guesses
+	// Resets the number of guesses
 	document.getElementById('remainGuess').innerHTML = guessesRemain;
-	//resets incorrect letters guessed to the DOM
+	// Resets incorrect letters guessed to the DOM
 	document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
 };
 
@@ -121,19 +121,21 @@ function winLose() {
 		document.getElementById('numWins').innerHTML = wins;
 		setTimeout(function() {alert ("Congratulations! You WIN!!! The team was the " + randomWord + "!"); }, 50);
 		setTimeout(function() {startGame(); }, 100);
+		setTimeout(function() {refresh(); }, 100);
 	} else if (guessesRemain === 0) {				
 		losses++;
 		document.getElementById('numLosses').innerHTML = losses;
 		setTimeout(function() {alert("Oh NO you've run out of guesses!!!"); }, 50);
 		setTimeout(function() {alert ("The team was the " + randomWord + "!"); }, 50);
-		setTimeout(function() {startGame(); }, 100);		
+		setTimeout(function() {startGame(); }, 100);
+		setTimeout(function() {refresh(); }, 100);
 	};
 };
 
-// function refresh() {
-// //When the array is empty alert the user to refresh the page
-// 	if (words.length == 0) {
-// 	alert("Great Job! You went through all of the teams!");
-// 	alert("Refresh the page to play again!");
-// 	};
-// };
+function refresh() {
+//When the array is empty alert the user to refresh the page
+	if ((parseInt(wins) + parseInt(losses)) == 19) {
+	alert("Great Job! You went through all of the teams!");
+	alert("Refresh the page to play again!");
+	};
+};
