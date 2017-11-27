@@ -30,12 +30,14 @@
 					<img id="newPic" src="assets/images/nfl.jpg" alt="nfl logo">
 				</a>
 				<button type="button" id="btn" class="btn btn-default">Hint</button>
-				<audio id="music" controls>
-					<source src="assets/audio/nflSongs.mp3" loop="loop" type="audio/mp3">
-				</audio>
+				
 				<div class="btn-group text-center" role="group">
 					<button type="button" id="reset" class="btn btn-default">New Word</button>
 					<button type="button" id="quit" class="btn btn-default">Give Up</button>
+					<button onclick="togglePlay()" type="button" id="music" class="btn btn-default">Music</button>
+					<audio id="myAudio">
+						<source src="assets/audio/nflSongs.mp3" loop="loop" type="audio/mp3" preload="auto">
+					</audio>
 				</div>
 			</div>
 			<div class="panel panel-default col-sm-8">

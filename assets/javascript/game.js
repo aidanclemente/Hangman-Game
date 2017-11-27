@@ -45,9 +45,15 @@ startGame();
 
 // Starts music automatically 
 window.onload = function() {
-	document.getElementById("music").play();
-	var music = document.getElementById("music");
+	document.getElementById("myAudio").play();
+	var music = document.getElementById("myAudio");
 	music.volume = 0.2;
+};
+
+var myAudio = document.getElementById("myAudio");
+
+function togglePlay() {
+  return myAudio.paused ? myAudio.play() : myAudio.pause();
 };
 
 //Picture for a Hint
@@ -58,12 +64,18 @@ document.getElementById("btn").addEventListener("click", function() {
 // Reset Button
 document.getElementById("reset").addEventListener("click", function() {
 	document.getElementById('newPic').src = "assets/images/nfl.jpg";
+	losses++;
+	document.getElementById('numLosses').innerHTML = losses;
 	startGame();
+	setTimeout(function() {refresh(); }, 50);
 });
 
 // Give Up Button
 document.getElementById("quit").addEventListener("click", function() {
 	document.getElementById('wordToGuess').innerHTML = randomWord;
+	losses++;
+	document.getElementById('numLosses').innerHTML = losses;
+	setTimeout(function() {refresh(); }, 50);
 });
 
 // get userGuess and save it 

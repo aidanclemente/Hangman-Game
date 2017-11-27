@@ -58,16 +58,17 @@ h3 {
 }
 
 #quit {
-    margin-right: 0;
+    margin-right: 5px;
     border-radius: 0;
 }
 
 #reset {
     border-radius: 0;
+    margin-right: 5px;
 }
 
 #music {
-	width: 100%;
+	margin-right: 0;
 }
 
 #picture{
