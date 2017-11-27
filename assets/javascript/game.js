@@ -1,5 +1,7 @@
-//Global Variables
+//+++++++Global Variables++++++++++++++++++++++++++++++
 
+		// to control music
+		var myAudio = document.getElementById("myAudio");
 		// key user pushes
 		var userGuess = [];
 		// letter not in word
@@ -19,7 +21,7 @@
 					  "u", "v", "w", "x", 
 					  "y", "z"]
 		// COUNTERS
-		var guessesRemain = 10;
+		var guessesRemain = 12;
 		var wins = 0;
 		var losses = 0;
 		//NFL teams to choose from randomly
@@ -40,6 +42,8 @@
 				   "assets/images/niners.gif", "assets/images/buccaneers.gif", 
 				   "assets/images/chiefs.jpg"]
 
+// +++++++++Game++++++++++++++++++++++++++++++++++
+
 // Starts the game 
 startGame();
 
@@ -49,34 +53,6 @@ window.onload = function() {
 	var music = document.getElementById("myAudio");
 	music.volume = 0.2;
 };
-
-var myAudio = document.getElementById("myAudio");
-
-function togglePlay() {
-  return myAudio.paused ? myAudio.play() : myAudio.pause();
-};
-
-//Picture for a Hint
-document.getElementById("btn").addEventListener("click", function() {
-	document.getElementById('newPic').src = picHint;
-});
-
-// Reset Button
-document.getElementById("reset").addEventListener("click", function() {
-	document.getElementById('newPic').src = "assets/images/nfl.jpg";
-	losses++;
-	document.getElementById('numLosses').innerHTML = losses;
-	startGame();
-	setTimeout(function() {refresh(); }, 50);
-});
-
-// Give Up Button
-document.getElementById("quit").addEventListener("click", function() {
-	document.getElementById('wordToGuess').innerHTML = randomWord;
-	losses++;
-	document.getElementById('numLosses').innerHTML = losses;
-	setTimeout(function() {refresh(); }, 50);
-});
 
 // get userGuess and save it 
 document.onkeyup = function(guess) {
@@ -123,10 +99,12 @@ document.onkeyup = function(guess) {
 	};
 };
 
-//Start/Reset function
+// +++++++++++++++Functions +++++++++++++++++++++++++
+
+// Start/Reset function
 function startGame() {
 
-	 guessesRemain = 10;
+	 guessesRemain = 12;
 	 underScore = [];
 	 guesssedLetters = [];
 	 wrongGuess = [];
@@ -143,6 +121,8 @@ function startGame() {
 		underScore.push('_');
 	}
 
+	// Resets NFL picture
+	document.getElementById('newPic').src = "assets/images/nfl.jpg";
 	// Hides instructions
 	document.getElementById('hide').innerHTML = "Press any letter to get started";
 	// Writes the underscores to the DOM
@@ -153,7 +133,7 @@ function startGame() {
 	document.getElementById('lettersGuessed').innerHTML = wrongGuess.join(" ");
 };
 
-// Guessed all the letters WIN/Run out of guesses loose Game resets
+// Guessed all letters WIN/No more guesses loose and Game resets
 function winLose() {
 	if (underScore.indexOf("_") == -1) {
 		wins++;
@@ -173,10 +153,50 @@ function winLose() {
 	};
 };
 
-//When the array is empty alert the user to refresh the page
+// When words array is empty alert user to refresh page
 function refresh() {
 	if ((parseInt(wins) + parseInt(losses)) == 19) {
 	alert("Great Job! You went through all of the teams!");
 	alert("Refresh the page to play again!");
 	};
 };
+
+// Confirm end game or continue playing
+function gameEnd() {
+	var c = confirm("Continue playing?");
+	if (c == true) {
+		startGame();
+	} else {
+		alert("Thank you for playing!");
+	};
+};
+
+// Pause or Play music when push Music button
+// Audio onclick set inline html
+function togglePlay() {
+  return myAudio.paused ? myAudio.play() : myAudio.pause();
+};
+
+// ++++++++++++++Buttons++++++++++++++++++++++++++
+
+// Picture for Hint Button
+document.getElementById("btn").addEventListener("click", function() {
+	document.getElementById('newPic').src = picHint;
+});
+
+// Reset Button
+document.getElementById("reset").addEventListener("click", function() {
+	losses++;
+	document.getElementById('numLosses').innerHTML = losses;
+	startGame();
+	setTimeout(function() {refresh(); }, 50);
+});
+
+// Give Up Button
+document.getElementById("quit").addEventListener("click", function() {
+	document.getElementById('wordToGuess').innerHTML = randomWord;
+	losses++;
+	document.getElementById('numLosses').innerHTML = losses;
+	setTimeout(function() {gameEnd(); }, 50);
+	setTimeout(function() {refresh(); }, 50);
+});

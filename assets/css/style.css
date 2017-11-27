@@ -48,31 +48,35 @@ h3 {
 
 .btn {
 	margin: 20px;
+	margin-bottom: 5px;
 	width: 50%;
 	background-color: #fff;
 	border-radius: 0;
+	border: 1px black solid;
 }
 
 .btn:hover, #reset:hover, #quit:hover {
 	background-color: #b2b2b2;
+	cursor: pointer;
 }
 
-#quit {
-    margin-right: 5px;
+#quit, #reset {
+    margin-right: 8px;
     border-radius: 0;
-}
-
-#reset {
-    border-radius: 0;
-    margin-right: 5px;
+    border: 1px black solid;
 }
 
 #music {
 	margin-right: 0;
+	border: 1px black solid;
 }
 
 #picture{
 	background-image: url("../images/nfl.jpg");
+}
+
+#newPic:hover, header:hover, h1:hover, h2:hover, h3:hover {
+	cursor: default;
 }
 
 
