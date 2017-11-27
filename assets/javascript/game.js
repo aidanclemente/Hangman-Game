@@ -46,6 +46,8 @@ startGame();
 // Starts music automatically 
 window.onload = function() {
 	document.getElementById("music").play();
+	var music = document.getElementById("music");
+	music.volume = 0.2;
 };
 
 //Picture for a Hint
