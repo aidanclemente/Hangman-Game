@@ -51,7 +51,7 @@ h3 {
 	margin-bottom: 5px;
 	width: 50%;
 	background-color: #fff;
-	border-radius: 0;
+	border-radius: 21px;
 	border: 1px black solid;
 }
 
@@ -60,20 +60,13 @@ h3 {
 	cursor: pointer;
 }
 
-#quit, #reset, #startOver {
+#quit, #reset, #startOver, #music {
     margin-right: 5px;
+    margin-left: 0px;
     border-radius: 21px;
     border: 1px black solid;
     padding: 3px 0;
     line-height: 20px;
-}
-
-#music {
-	margin-right: 5px;
-	border: 1px black solid;
-	padding: 3px 0;
-    line-height: 20px;
-    border-radius: 21px;
 }
 
 #picture{
