@@ -184,12 +184,17 @@ document.getElementById("btn").addEventListener("click", function() {
 	document.getElementById('newPic').src = picHint;
 });
 
-// Reset Button
+// New Word Button
 document.getElementById("reset").addEventListener("click", function() {
 	losses++;
 	document.getElementById('numLosses').innerHTML = losses;
 	startGame();
 	setTimeout(function() {refresh(); }, 50);
+});
+
+// Start Over/Refresh Page Button
+document.getElementById("startOver").addEventListener("click", function(){
+	window.location.reload();
 });
 
 // Give Up Button

@@ -60,15 +60,20 @@ h3 {
 	cursor: pointer;
 }
 
-#quit, #reset {
-    margin-right: 8px;
-    border-radius: 0;
+#quit, #reset, #startOver {
+    margin-right: 5px;
+    border-radius: 21px;
     border: 1px black solid;
+    padding: 3px 0;
+    line-height: 20px;
 }
 
 #music {
-	margin-right: 0;
+	margin-right: 5px;
 	border: 1px black solid;
+	padding: 3px 0;
+    line-height: 20px;
+    border-radius: 21px;
 }
 
 #picture{
