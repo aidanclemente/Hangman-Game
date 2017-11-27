@@ -49,8 +49,19 @@ window.onload = function() {
 };
 
 //Picture for a Hint
-document.getElementById("btn").addEventListener("click", function(){
+document.getElementById("btn").addEventListener("click", function() {
 	document.getElementById('newPic').src = picHint;
+});
+
+// Reset Button
+document.getElementById("reset").addEventListener("click", function() {
+	document.getElementById('newPic').src = "assets/images/nfl.jpg";
+	startGame();
+});
+
+// Give Up Button
+document.getElementById("quit").addEventListener("click", function() {
+	document.getElementById('wordToGuess').innerHTML = randomWord;
 });
 
 // get userGuess and save it 

@@ -29,15 +29,19 @@
 				<a href="#" class="thumbnail">
 					<img id="newPic" src="assets/images/nfl.jpg" alt="nfl logo">
 				</a>
-				 <button type="button" id="btn" class="btn btn-default">Hint</button>
-				 <audio id="music" controls>
-				 	<source src="assets/audio/nflSongs.mp3" loop="loop" type="audio/mp3">
-				 </audio>
+				<button type="button" id="btn" class="btn btn-default">Hint</button>
+				<audio id="music" controls>
+					<source src="assets/audio/nflSongs.mp3" loop="loop" type="audio/mp3">
+				</audio>
+				<div class="btn-group text-center" role="group">
+					<button type="button" id="reset" class="btn btn-default">New Word</button>
+					<button type="button" id="quit" class="btn btn-default">Give Up</button>
+				</div>
 			</div>
 			<div class="panel panel-default col-sm-8">
 				<h3>Wins: <span id="numWins"></span></h3>
 				<audio id="clap">
-					<source src="assets/audio/applause2.mp3" type="audio/mp3">
+					<source src="assets/audio/trumpet.flac" type="audio/flac">
 				</audio>
 				<h3>Losses: <span id="numLosses"></span></h3>
 				<audio id="fail">

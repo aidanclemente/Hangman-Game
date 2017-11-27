@@ -42,14 +42,28 @@ h3 {
 	text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
+.btn-group {
+	width: 100%;
+}
+
 .btn {
 	margin: 20px;
 	width: 50%;
 	background-color: #fff;
+	border-radius: 0;
 }
 
-.btn:hover {
+.btn:hover, #reset:hover, #quit:hover {
 	background-color: #b2b2b2;
+}
+
+#quit {
+    margin-right: 0;
+    border-radius: 0;
+}
+
+#reset {
+    border-radius: 0;
 }
 
 #music {
